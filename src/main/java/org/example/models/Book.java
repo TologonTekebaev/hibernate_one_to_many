@@ -20,6 +20,15 @@ public class Book {
     private String name;
     private String author;
     private BigDecimal price;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @ToString.Exclude
+    private Vendor vendor;
+//    ALL,
+//    PERSIST, x
+//    MERGE,
+//    REMOVE,
+//    REFRESH,
+//    DETACH;
 
     public Book(){
 

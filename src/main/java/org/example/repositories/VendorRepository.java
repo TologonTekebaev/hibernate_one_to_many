@@ -15,61 +15,45 @@ public class VendorRepository implements AutoCloseable {
 
     public void save(Vendor newVendor){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-
         entityManager.getTransaction().begin();
         entityManager.persist(newVendor);
         entityManager.getTransaction().commit();
-
         entityManager.close();
     }
 
     public void deleteById(Long id){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        Vendor vendor = entityManager.createQuery("select v from Vendor v join v.books b where b.id = ?1",
-                        Vendor.class).setParameter(1, id).getSingleResult();
-        vendor.removeBookById(id);
-        entityManager.persist(vendor);
+//        entityManager.remove(entityManager.find(Vendor.class, id));
+        entityManager.createQuery("delete from Vendor v where v.id = ?1")
+                .setParameter(1, id).getSingleResult();
         entityManager.getTransaction().commit();
         entityManager.close();
-
     }
-
-    public void update(Vendor newVendor){
+ public void merge(Vendor newVendor){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-
         entityManager.getTransaction().begin();
         entityManager.merge(newVendor);
         entityManager.getTransaction().commit();
-
         entityManager.close();
-    }
-
-
-    public List<Vendor> findAll(){
-
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        List<Vendor> vendors = entityManager.createQuery("select v from Vendor v", Vendor.class).getResultList();
-
-        entityManager.getTransaction().commit();
-        entityManager.close();
-
-        return vendors;
-        
     }
 
     public Vendor findById(Long id){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        Vendor vendor = entityManager.createQuery("select v from Vendor v where v.id = ?1",
-                Vendor.class).setParameter(1, id).getSingleResult();
-
+        Vendor vendor = entityManager.find(Vendor.class, id);
         entityManager.getTransaction().commit();
         entityManager.close();
         return vendor;
     }
-
+    public List<Vendor> findAll(){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        List<Vendor> vendors = entityManager.createQuery("select v from Vendor v", Vendor.class).getResultList();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return vendors;
+    }
     @Override
     public void close() throws Exception {
         entityManagerFactory.close();

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,10 @@ public class Vendor {
     private Long id;
     private String name;
     private String email;
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "vendor", fetch = FetchType.LAZY)
+    private List<Book> books = new ArrayList<>();
+
 
     public Vendor(){
 
@@ -28,15 +33,11 @@ public class Vendor {
         this.name = name;
         this.email = email;
     }
-    public void removeBookById(Long id){
-        books.removeIf(book -> book.getId().equals(id));
+
+    public void addBook(Book book){
+        this.books.add(book);
     }
-
-    public void addBook(Book newBook){
-        this.books.add(newBook);
+    public void removeBook(Long id){
+        this.books.removeIf(book -> book.getId().equals(id));
     }
-
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    private List<Book> books;
-
 }

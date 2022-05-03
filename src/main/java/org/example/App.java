@@ -18,50 +18,37 @@ public class App {
         BookRepository bookRepository = new BookRepository();
         VendorRepository vendorRepository = new VendorRepository();
 
-        bookRepository.deleteById(1L);
-
-//        Book book = bookRepository.findById(4L);
-//        Vendor vendor = vendorRepository.findById(1L);
-//        System.out.println(vendor);
-//        vendor.setBook(book);
-//        vendorRepository.update(vendor);
+        bookRepository.deleteById(3L);
 
 //        Vendor vendor = vendorRepository.findById(1L);
 //
-//        Book book1 = new Book(
-//                "Troya", "Homer", BigDecimal.valueOf(1500)
-//        );
-//
-//        bookRepository.save(book1);
+//        System.out.println("\u001B[35m" + vendor + "\u001B[35m");
 
-//        vendor.setBook(book1);
-//        vendorRepository.update(vendor);
+//       Book book = new Book(
+//                "Torin", "Dubshit", BigDecimal.valueOf(2050));
+//        vendor.addBook(book);
+//        book.setVendor(vendor);
+//        vendorRepository.merge(vendor);
+//
+//        Book book = bookRepository.findById(1L);
+//
+//
+//        book.setVendor(vendor);
+//        vendorRepository.merge(vendor);
 
-//         Vendor vendor = new Vendor();
+//        Vendor tologon = new Vendor("Nurbek",
+//                "nurbek@gamil.com");
 //
-//                Book book1 = new Book(
-//                "Toolor kulaganda", "Chyngyz Aitmatov", BigDecimal.valueOf(900)
-//                );
+//        Book book = new Book("Hard", "John", BigDecimal.valueOf(1200));
+//        tologon.addBook(book);
 //
-//                Book book2 = new Book(
-//                        "Kanybek", "Kasymaaly Jantoshev", BigDecimal.valueOf(1200)
-//                );
+//        tologon.addBook(book);
+//        book.setVendor(tologon);
 //
-//                vendor.setBooks(List.of(book1, book2));
-//                vendorRepository.save(vendor);
+//        vendorRepository.save(tologon);
 
-
-//        Book book = new Book(
-//                "Kyamat", "Chyngyz Aitmatov", BigDecimal.valueOf(1000)
-//
-//        );
-//
-//        bookRepository.save(book);
-//        bookRepository.findAll().forEach(System.out::println);
-
-//        Vendor vendor = new Vendor("Ulan", "ulan@gmail.com");
-//        vendor.setBooks();
-//        vendorRepository.save(vendor);
+//        bookRepository.save(new Book("Persistence",
+//                "John", BigDecimal.valueOf(1500) ));
 
         bookRepository.close();
         vendorRepository.close();
